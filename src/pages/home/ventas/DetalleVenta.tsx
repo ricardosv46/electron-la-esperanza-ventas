@@ -81,13 +81,6 @@ const DetalleVenta = () => {
                     <td className="text-center ">{item?.Evento?.titulo}</td>
 
                     <td>
-                      {/* <Detalle
-                        code={code}
-                        onClick={() => {
-                          setDatosventa(item)
-                          onOpen()
-                        }}
-                      /> */}
                       <div className="flex justify-center gap-3">
                         <button className="text-center btn-icon btn-ghost-primary">
                           <IconUser />
@@ -97,12 +90,7 @@ const DetalleVenta = () => {
                           onClick={async () => {
                             const respuesta = await getReporte(code);
                             console.log(respuesta);
-                            window.open(respuesta);
-                            // getReporteVendedora({ code }).then((res) => {
-                            //   if (res.ok) {
-                            //     window.open(res.linkReporte)
-                            //   }
-                            // })
+                            // window.open(respuesta);
                           }}
                         >
                           <IconPdf />
