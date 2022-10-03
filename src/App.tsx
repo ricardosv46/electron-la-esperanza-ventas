@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import AppBar from './AppBar';
+import { ToastContainer } from 'react-toastify';
+import AppBar from './components/AppBar';
+import { BrowserRouter } from 'react-router-dom';
+import client from './apollo';
+import { ApolloProvider } from '@apollo/client';
+
+import 'react-toastify/dist/ReactToastify.css';
+import AuthProvider from '@store/auth/AuthState';
+import RootRouter from '@routes/RootRouter';
 
 function App() {
   console.log(window.ipcRenderer);
@@ -34,47 +42,30 @@ function App() {
   }, [fromMain, isSent]);
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen ">
       {window.Main && (
-        <div className="flex-none">
-          <AppBar />
+        <div className="flex-none ">
+          <ApolloProvider client={client}>
+            <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
+
+            <AuthProvider>
+              <BrowserRouter>
+                <RootRouter />
+              </BrowserRouter>
+            </AuthProvider>
+          </ApolloProvider>
         </div>
       )}
-      <div className="flex-auto">
-        <div className=" flex flex-col justify-center items-center h-full bg-gray-800 space-y-4">
-          <h1 className="text-2xl text-gray-200">Vite + React + Typescript + Electron + Tailwind</h1>
-          <button
-            className="bg-yellow-400 py-2 px-4 rounded focus:outline-none shadow hover:bg-yellow-200"
-            onClick={handleToggle}
-          >
-            Click Me
-          </button>
-          {isOpen && (
-            <div className="flex flex-col space-y-4 items-center">
-              <div className="flex space-x-3">
-                <h1 className="text-xl text-gray-50">💝 Welcome 💝, now send a message to the Main 📩📩</h1>
-                <button
-                  onClick={sendMessageToElectron}
-                  className=" bg-green-400 rounded px-4 py-0 focus:outline-none hover:bg-green-300"
-                >
-                  Send
-                </button>
-              </div>
-              {isSent && (
-                <div>
-                  <h4 className=" text-green-500">Message sent!!</h4>
-                </div>
-              )}
-              {fromMain && (
-                <div>
-                  {' '}
-                  <h4 className=" text-yellow-200">{fromMain}</h4>
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-      </div>
     </div>
   );
 }

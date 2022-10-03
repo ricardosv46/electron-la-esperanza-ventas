@@ -1,14 +1,37 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap'); */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* For AppBar */
 .draggable {
-    -webkit-user-select: none;
-    -webkit-app-region: drag;
-  }
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+}
 
 .undraggable {
-    -webkit-app-region: no-drag;
-  }
+  -webkit-app-region: no-drag;
+}
+
+._tableContainer_14yl8_1::-webkit-scrollbar {
+  @apply h-2;
+}
+._tableContainer_14yl8_1::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded;
+}
+
+body {
+  @apply dark:bg-gray-800;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
